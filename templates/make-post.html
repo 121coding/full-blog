@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}New post{% endblock %}
+{% block head %}
+{% block styles %}
+  {{ super() }}
+{% endblock %}
+{% endblock %}
+{% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            {% if is_edit: %}
+            <h1>Edit Post</h1>
+            {% else: %}
+            <h1>New Post</h1>
+            {% endif %}
+            <span class="subheading">You're going to make a great blog post!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- This is where the form will go -->
+          {% from 'bootstrap5/form.html' import render_form %}
+          {{ render_form(form, novalidate=False, button_style='btn-primary') }}
+          {{ ckeditor.load(pkg_type="full-all") }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+{% endblock %}
+
